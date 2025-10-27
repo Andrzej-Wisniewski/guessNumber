@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Alert,
   useWindowDimensions,
+  KeyboardAvoidingView,
 } from 'react-native'; // nie 'react-native-web'
 
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -46,44 +47,49 @@ function StartGameScreen({ onPickNumber }) {
   const buttonWidth = width < 380 ? 100 : 150;
 
   return (
-    <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
-      <Title>Zgadnij moją liczbę</Title>
-      <Card>
-        <InstructionText>Wpisz Liczbę</InstructionText>
-        <TextInput
-          style={[
-            styles.numberInput,
-            { width: inputWidth, fontSize: inputWidth / 2 },
-          ]}
-          maxLength={2}
-          keyboardType="number-pad"
-          autoCapitalize="none"
-          autoCorrect={false}
-          onChangeText={numberInputHandler}
-          value={enteredNumber}
-        />
-        <View style={styles.buttonsContainer}>
-          <PrimaryButton
-            style={{ width: buttonWidth }}
-            onPress={resetInputHandler}
-          >
-            Reset
-          </PrimaryButton>
-          <PrimaryButton
-            style={{ width: buttonWidth }}
-            onPress={confirmInputHandler}
-          >
-            Potwierdź
-          </PrimaryButton>
-        </View>
-      </Card>
-    </View>
+    <KeyboardAvoidingView style={styles.screen}>
+      <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
+        <Title>Zgadnij moją liczbę</Title>
+        <Card>
+          <InstructionText>Wpisz Liczbę</InstructionText>
+          <TextInput
+            style={[
+              styles.numberInput,
+              { width: inputWidth, fontSize: inputWidth / 2 },
+            ]}
+            maxLength={2}
+            keyboardType="number-pad"
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={numberInputHandler}
+            value={enteredNumber}
+          />
+          <View style={styles.buttonsContainer}>
+            <PrimaryButton
+              style={{ width: buttonWidth }}
+              onPress={resetInputHandler}
+            >
+              Reset
+            </PrimaryButton>
+            <PrimaryButton
+              style={{ width: buttonWidth }}
+              onPress={confirmInputHandler}
+            >
+              Potwierdź
+            </PrimaryButton>
+          </View>
+        </Card>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   rootContainer: {
     flex: 1,
     alignItems: 'center',
